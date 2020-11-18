@@ -1,4 +1,7 @@
 # web-vue
+```bash
+this project using nuxt and vue with typescript
+```
 
 ## Build Setup
 
