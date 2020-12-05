@@ -14,8 +14,8 @@
         </ul>
       </lazy-wrapper>
       <p class="links">
-        <a :href="'https://news.ycombinator.com/submitted?id=' + user.id">submissions</a> |
-        <a :href="'https://news.ycombinator.com/threads?id=' + user.id">comments</a>
+        <a :href="'' + user.id">submissions</a> |
+        <a :href="'' + user.id">comments</a>
       </p>
     </template>
     <template v-else>
