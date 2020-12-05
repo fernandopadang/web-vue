@@ -19,6 +19,9 @@ export const state = () => {
     },
     pages: {
       /* [page: number] : [ [id: number] ] */
+    },
+    subPages: {
+      /* [subPages: number] : Sub Pages */
     }
   }
 
@@ -50,6 +53,9 @@ export const mutations = {
   },
   SET_USER: (state, { id, user }) => {
     Vue.set(state.users, id, user || false) /* false means user not found */
+  },
+  SET_SUB_PAGES: (state, { subPages, item }) => {
+    Vue.set(state.subPages, subPages, item || false)
   }
 }
 // =================================================
@@ -96,6 +102,14 @@ export const actions = {
       user => commit('SET_USER', { id, user }),
       () => this.$axios.$get(`/user/${id}`),
       Object.assign({ id, loading: true }, state.users[id])
+    )
+  },
+
+  FETCH_SUB_PAGES ({ state, commit }, { pages, subPages }) {
+    return lazy(
+      item => commit('SET_SUB_PAGES', { subPages, item }),
+      () => this.$axios.$get(`/${pages}/${subPages}`),
+      Object.assign({ subPages, loading: true }, state.subPages)
     )
   }
 }

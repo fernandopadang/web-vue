@@ -3,7 +3,7 @@
     <span class="score">{{ item.points }}</span>
     <span class="title">
       <template v-if="isAbsolute(item.url)">
-        <a href="" rel="noopener">{{ item.title }}</a>
+        <router-link :to="'/news/' + item.id">{{ item.title }}</router-link>
         <span class="host"> ({{ item.url | host }})</span>
       </template>
       <template v-else>
