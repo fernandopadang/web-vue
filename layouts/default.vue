@@ -14,6 +14,7 @@
       </nav>
     </header>
     <nuxt nuxt-child-key="none" role="main" />
+    <footer class="footer">©2020 All Rights Reserved</footer>
   </div>
 </template>
 
@@ -97,6 +98,7 @@ a {
   max-width: 800px;
   margin: 0 auto;
   position: relative;
+  min-height: 83.3vh;
 }
 .appear-active {
   transition: opacity 0.4s ease;
@@ -106,6 +108,13 @@ a {
 }
 .appear, .page-enter, .page-leave-active {
   opacity: 0;
+}
+footer{
+  text-align: center;
+    background: #0050b3;
+    color: #fbfbfb;
+    padding: 16px 0;
+    margin-top: 16px;
 }
 @media (max-width: 860px) {
   .header .inner {
