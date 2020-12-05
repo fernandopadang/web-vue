@@ -8,8 +8,8 @@
         <router-link v-for="(list, key) in feeds" :key="key" :to="`/${key}`">
           {{ list.title }}
         </router-link>
-        <a class="github" href="https://www.instagram.com/fernandopadang/" target="_blank" rel="noopener banner">
-          @fernandopadang
+        <a class="github" href="https://fernandopadang.tech" target="_blank" rel="noopener banner">
+          fernandopadang
         </a>
       </nav>
     </header>
@@ -51,7 +51,7 @@ a {
   text-decoration: none;
 }
 .header {
-  background-color: #2E495E;
+  background-color: #0050b3;
   z-index: 999;
   height: 55px;
   .inner {
