@@ -8,7 +8,7 @@
           </transition-group>
         </div>
       </transition>
-      <item-list-nav :feed="feed" :page="page" :max-page="maxPage" />
+      <item-list-nav :pages="pages" :page="page" :max-page="maxPage" />
     </lazy-wrapper>
   </div>
 </template>
@@ -17,19 +17,20 @@
 import Item from '~/components/Item.vue'
 import ItemListNav from '~/components/ItemListNav.vue'
 import LazyWrapper from '~/components/LazyWrapper'
-import { feeds, validFeeds } from '~/common/api'
+import { pages, validPages } from '~/common/api'
 export default {
   components: {
     Item,
     ItemListNav,
     LazyWrapper
   },
-  validate ({ params: { feed } }) {
-    return validFeeds.includes(feed)
+  validate ({ params: { pages } }) {
+    return validPages.includes(pages)
   },
   fetch () {
-    const { feed, page = 1 } = this.$route.params
-    return this.$store.dispatch('FETCH_FEED', { page: Number(page) || 1, feed })
+    const { pages } = this.$route.params
+    const { page = 1 } = this.$route.query
+    return this.$store.dispatch('FETCH_PAGES', { page: Number(page) || 1, pages: pages })
   },
   data () {
     return {
@@ -38,17 +39,17 @@ export default {
     }
   },
   computed: {
-    feed () {
-      return this.$route.params.feed
+    pages () {
+      return this.$route.params.pages
     },
     page () {
-      return Number(this.$route.params.page) || 1
+      return Number(this.$route.query.page) || 1
     },
     maxPage () {
-      return feeds[this.feed].pages
+      return pages[this.pages].pages
     },
     pageData () {
-      return this.$store.state.feeds[this.feed][this.page]
+      return this.$store.state.pages[this.pages][this.page]
     },
     displayedItems () {
       return this.pageData?.map(id => this.$store.state.items[id]) || []
@@ -58,7 +59,7 @@ export default {
     }
   },
   watch: {
-    feed: 'pageChanged',
+    pages: 'pageChanged',
     page: 'pageChanged'
   },
   mounted () {
@@ -67,13 +68,13 @@ export default {
   methods: {
     pageChanged (to, from = -1) {
       if (to <= 0 || to > this.maxPage) {
-        this.$router.replace(`/${this.feed}/1`)
+        this.$router.replace(`/${this.pages}/1`)
         return
       }
       // Prefetch next page
       this.$store
-        .dispatch('FETCH_FEED', {
-          feed: this.feed,
+        .dispatch('FETCH_PAGES', {
+          pages: this.pages,
           page: this.page,
           prefetch: true
         })
@@ -85,7 +86,7 @@ export default {
   },
   head () {
     return {
-      title: feeds[this.$route.params.feed].title
+      title: pages[this.$route.params.pages].title
     }
   }
 }

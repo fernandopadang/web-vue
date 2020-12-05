@@ -1,7 +1,5 @@
-export const feeds = {
-  news: { title: 'News', pages: 10 },
-  ask: { title: 'Ask', pages: 2 },
-  show: { title: 'Show', pages: 2 }
+export const pages = {
+  news: { title: 'News', pages: 10 }
 }
 
-export const validFeeds = Object.keys(feeds)
+export const validPages = Object.keys(pages)

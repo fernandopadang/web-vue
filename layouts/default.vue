@@ -5,7 +5,7 @@
         <router-link to="/" exact>
           <img class="logo" src="~/assets/logo.svg" alt="logo">
         </router-link>
-        <router-link v-for="(list, key) in feeds" :key="key" :to="`/${key}`">
+        <router-link v-for="(list, key) in pages" :key="key" :to="`/${key}`">
           {{ list.title }}
         </router-link>
         <a class="github" href="https://fernandopadang.tech" target="_blank" rel="noopener banner">
@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import { feeds } from '~/common/api'
+import { pages } from '~/common/api'
 export default {
   computed: {
-    feeds: () => feeds
+    pages: () => pages
   },
   head () {
     const host = process.server

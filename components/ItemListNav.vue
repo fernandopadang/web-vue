@@ -1,12 +1,12 @@
 
 <template>
   <div class="news-list-nav">
-    <router-link v-if="page > 1" :to="`/${feed}/${page - 1}`">
+    <router-link v-if="page > 1" :to="{ path: `${pages}`, query: { page: `${page - 1}` }}">
       &lt; prev
     </router-link>
     <a v-else class="disabled">&lt; prev</a>
     <span>{{ page }}/{{ maxPage }}</span>
-    <router-link v-if="hasMore" :to="`/${feed}/${page + 1}`">
+    <router-link v-if="hasMore" :to="{ path: `${pages}`, query: { page: `${page + 1}` }}">
       more &gt;
     </router-link>
     <a v-else class="disabled">more &gt;</a>
@@ -16,7 +16,7 @@
 <script>
 export default {
   props: {
-    feed: {
+    pages: {
       type: String,
       required: true
     },
