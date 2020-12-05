@@ -3,7 +3,7 @@
     <span class="score">{{ item.points }}</span>
     <span class="title">
       <template v-if="isAbsolute(item.url)">
-        <a :href="item.url" target="_blank" rel="noopener">{{ item.title }}</a>
+        <a href="" rel="noopener">{{ item.title }}</a>
         <span class="host"> ({{ item.url | host }})</span>
       </template>
       <template v-else>
@@ -21,7 +21,7 @@
       </span>
       <span v-if="item.type !== 'job'" class="comments-link">
         |
-        <router-link :to="'/item/' + item.id">{{ item.comments_count }} comments</router-link>
+        <router-link to="">{{ item.comments_count }} comments</router-link>
       </span>
     </span>
   </li>
