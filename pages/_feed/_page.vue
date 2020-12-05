@@ -1,7 +1,5 @@
 <template>
   <div class="view">
-    <item-list-nav :feed="feed" :page="page" :max-page="maxPage" />
-
     <lazy-wrapper :loading="loading">
       <transition :name="transition" mode="out-in">
         <div :key="displayedPage" class="news-list">
