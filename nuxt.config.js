@@ -43,6 +43,6 @@ export default {
   },
 
   axios: {
-    baseURL: 'https://api.hackerwebapp.com'
+    baseURL: 'https://5fcb917351f70e00161f1b85.mockapi.io/api/v1'
   },
 }

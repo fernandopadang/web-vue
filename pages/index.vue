@@ -1,8 +1,8 @@
 <script>
-import { validFeeds } from '~/common/api'
+import { validPages } from '~/common/api'
 export default {
   fetch ({ redirect }) {
-    redirect('/' + validFeeds[0])
+    redirect('/' + validPages[0])
   }
 }
 </script>

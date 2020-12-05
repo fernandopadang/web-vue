@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import { CancelToken } from 'axios'
-import { validFeeds } from '~/common/api'
+import { validPages } from '~/common/api'
 import { lazy } from '~/common/utils'
 
 // Learn more on https://nuxtjs.org/guide/vuex-store
@@ -17,13 +17,13 @@ export const state = () => {
     users: {
       /* [id: string]: User */
     },
-    feeds: {
+    pages: {
       /* [page: number] : [ [id: number] ] */
     }
   }
 
-  validFeeds.forEach((feed) => {
-    s.feeds[feed] = {}
+  validPages.forEach((page) => {
+    s.pages[page] = {}
   })
 
   return s
@@ -33,8 +33,8 @@ export const state = () => {
 // Mutations
 // =================================================
 export const mutations = {
-  SET_FEED: (state, { feed, ids, page }) => {
-    Vue.set(state.feeds[feed], page, ids)
+  SET_PAGES: (state, { pages, ids, page }) => {
+    Vue.set(state.pages[pages], page, ids)
   },
   SET_ITEM: (state, { item }) => {
     if (item) {
@@ -56,30 +56,30 @@ export const mutations = {
 // Actions
 // =================================================
 export const actions = {
-  FETCH_FEED ({ commit, state }, { feed, page, prefetch }) {
-    // Don't priorotize already fetched feeds
-    if (state.feeds[feed][page] && state.feeds[feed][page].length) {
+  FETCH_PAGES ({ commit, state }, { pages, page, prefetch }) {
+    // Don't priorotize already fetched pages
+    if (state.pages[pages][page] && state.pages[pages][page].length) {
       prefetch = true
     }
     if (!prefetch) {
-      if (this.feedCancelSource) {
-        this.feedCancelSource.cancel(
-          'priorotize feed: ' + feed + ' page: ' + page
+      if (this.pagesCancelSource) {
+        this.pagesCancelSource.cancel(
+          'priorotize pages: ' + pages + ' page: ' + page
         )
       }
-      this.feedCancelSource = CancelToken.source()
+      this.pagesCancelSource = CancelToken.source()
     }
     return lazy(
       (items) => {
         const ids = items.map(item => item.id)
-        commit('SET_FEED', { feed, ids, page })
+        commit('SET_PAGES', { pages: pages, ids, page })
         commit('SET_ITEMS', { items })
       },
       () =>
-        this.$axios.$get(`/${feed}?page=${page}`, {
-          cancelToken: this.feedCancelSource && this.feedCancelSource.token
+        this.$axios.$get(`/${pages}?page=${page}`, {
+          cancelToken: this.pagesCancelSource && this.pagesCancelSource.token
         }),
-      (state.feeds[feed][page] || []).map(id => state.items[id])
+      (state.pages[pages][page] || []).map(id => state.items[id])
     )
   },
 
