@@ -10,12 +10,16 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
+    "@nuxtjs/axios": "^5.12.3",
     "ant-design-vue": "^1.6.5",
     "core-js": "^3.6.5",
-    "nuxt": "^2.14.6"
+    "nuxt": "^2.14.6",
+    "stylus": "^0.54.8",
+    "stylus-loader": "^4.3.1"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",
-    "@nuxt/typescript-build": "^2.0.3"
+    "@nuxt/typescript-build": "^2.0.3",
+    "@nuxtjs/pwa": "^3.3.2"
   }
 }

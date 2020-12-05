@@ -1,7 +1,7 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'web-vue',
+    titleTemplate: 'Web Vue | %s',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -19,7 +19,9 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '@/plugins/antd-ui'
+    '@/plugins/antd-ui',
+    '~/plugins/swr',
+    '~/plugins/filters'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -27,8 +29,9 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -37,5 +40,9 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
-  }
+  },
+
+  axios: {
+    baseURL: 'https://api.hackerwebapp.com'
+  },
 }
